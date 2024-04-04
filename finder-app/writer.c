@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/stat.h>
 #include <errno.h>
 #include <syslog.h>
 
@@ -13,7 +12,7 @@ void write_to_file(const char *file_path, const char *text) {
     if (file == NULL) {
         // Failed to open file
         syslog(LOG_ERR, "Failed to open file: %s", strerror(errno));
-        exit(EXIT_FAILURE);
+        exit(1);
     }
 
     // Write text to the file
@@ -34,7 +33,7 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "2) String to be entered in the file.\n");
         syslog(LOG_ERR, "Invalid number of arguments");
         closelog();
-        exit(EXIT_FAILURE);
+        exit(1);
     }
 
     const char *file_path = argv[1];
